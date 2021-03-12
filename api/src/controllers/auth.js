@@ -40,6 +40,7 @@ exports.authenticate = (req, res, callback) => {
 		}
 		
   }).catch( (err) => {
+		res.status(500)
     utils.callback(res, utils.response(err))
   })
 }

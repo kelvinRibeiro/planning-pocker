@@ -9,7 +9,7 @@ const controller = require('../controllers/auth')
 * @swagger
 * tags:
 *   name: Auth  
-*   description: Rota usada para autenticar um usuário.
+*   description: Autenticação de usuários.
 */
 
 /** 
@@ -18,10 +18,26 @@ const controller = require('../controllers/auth')
 *   /auth/authenticate:
 *     post:
 *       tags: [Auth]
-*       summary: Welcome to swagger-jsdoc!
+*       summary: Recebe informações e autentica um usuário 
+*       requestBody:
+*         required: true
+*         content:
+*           application/json:
+*             schema: 
+*               type: object
+*               properties:
+*                 email:      
+*                   type: string
+*                 password:
+*                   type: string
 *       responses:
 *         200:
-*           description: Returns a mysterious string.
+*           description: Retorna um token de usuário.
+*         401: 
+*           description: Retorna um possivel erro na Autenticação.
+*         500: 
+*           description: Retorna um possivel erro do Banco de Dados.
+
 */
 router.post('/authenticate', controller.authenticate)
 

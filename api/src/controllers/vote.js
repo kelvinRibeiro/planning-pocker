@@ -47,7 +47,10 @@ exports.show = (req, res) => {
 
 exports.add = (req, res) => {
   model.votes.create(req.body).then( (data) => {
+
+    utils.sendExchange('AllVotes', data, `Novo Voto computado! ID #${ data.id }`)
     utils.callback(res,  utils.response(null, data), `${ socket_base }_new`)
+  
   }).catch( (err) => {
 
     res.status(500)

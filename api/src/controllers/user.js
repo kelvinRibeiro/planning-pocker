@@ -47,6 +47,7 @@ exports.add = (req, res) => {
   req.body.password =	bcrypt.hashSync(req.body.password, 10)
 
   model.users.create(req.body).then( (data) => {
+    delete data.password
     utils.callback(res,  utils.response(null, data))
   }).catch( (err) => {
 
@@ -86,6 +87,7 @@ exports.update = (req, res) => {
 	}
   
   model.users.update(req.body, { where: { id: req.query.id } }).then( (data) => {
+    delete data.password
     utils.callback(res,  utils.response(null, data))
   }).catch( (err) => {
 

@@ -10,7 +10,7 @@ const auth = require('../packages/auth')
 * @swagger
 * tags:
 *   name: User  
-*   description: Cadastro de Cartas.
+*   description: Cadastro de Usuários.
 */
 
 /** 
@@ -18,10 +18,17 @@ const auth = require('../packages/auth')
 * /user/all:
 *   get:
 *     tags: [User]
-*     summary: Welcome to swagger-jsdoc!
+*     parameters:
+*      -  name: x-access-token
+*         in: header
+*         description: Token do Usuário autenticado
+*         required: true
+*     summary: Listagem de usuários
 *     responses:
 *       200:
-*         description: Returns a mysterious string.
+*         description: Retorna um array de objetos contendo as usuários cadastradas.
+*       500: 
+*         description: Retorna um possivel erro ao executar a operação
 */
 router.get('/all',       auth.authorized, controller.all)
 
@@ -30,10 +37,21 @@ router.get('/all',       auth.authorized, controller.all)
 * /user/show:
 *   get:
 *     tags: [User]
-*     summary: Welcome to swagger-jsdoc!
+*     parameters:
+*      -  name: x-access-token
+*         in: header
+*         description: Token do Usuário autenticado
+*         required: true
+*      -  name: id
+*         in: query
+*         required: true
+*         description: Id do usuário
+*     summary: Exibe informações de um usuário pelo id
 *     responses:
 *       200:
-*         description: Returns a mysterious string.
+*         description: Retorna um objeto com uma usuário especifica
+*       500: 
+*         description: Retorna um possivel erro ao executar a operação
 */
 router.get('/show',      auth.authorized, controller.show)
 
@@ -42,10 +60,30 @@ router.get('/show',      auth.authorized, controller.show)
 * /user/add:
 *   post:
 *     tags: [User]
-*     summary: Welcome to swagger-jsdoc!
+*     parameters:
+*      -  name: x-access-token
+*         in: header
+*         description: Token do Usuário autenticado
+*         required: true
+*     summary: Cadastro de uma novo usuário
+*     requestBody:
+*         required: true
+*         content:
+*           application/json:
+*             schema: 
+*               type: object
+*               properties:
+*                 name:      
+*                   type: string
+*                 email:      
+*                   type: string
+*                 password:      
+*                   type: string
 *     responses:
 *       200:
-*         description: Returns a mysterious string.
+*         description: Retorna um objeto com a usuário cadastrado.
+*       500: 
+*         description: Retorna um possivel erro ao executar a operação
 */
 router.post('/add',      auth.authorized, controller.add)
 
@@ -54,10 +92,26 @@ router.post('/add',      auth.authorized, controller.add)
 * /user/search:
 *   post:
 *     tags: [User]
-*     summary: Welcome to swagger-jsdoc!
+*     parameters:
+*      -  name: x-access-token
+*         in: header
+*         description: Token do Usuário autenticado
+*         required: true
+*     summary: Busca um usuário
+*     requestBody:
+*         required: true
+*         content:
+*           application/json:
+*             schema: 
+*               type: object
+*               properties:
+*                 keyword:      
+*                   type: string
 *     responses:
 *       200:
-*         description: Returns a mysterious string.
+*         description: Retorna um objeto com a usuário encontrada na busca.
+*       500: 
+*         description: Retorna um possivel erro ao executar a operação
 */
 router.post('/search',   auth.authorized, controller.search)
 
@@ -66,22 +120,58 @@ router.post('/search',   auth.authorized, controller.search)
 * /user/update:
 *   put:
 *     tags: [User]
-*     summary: Welcome to swagger-jsdoc!
+*     parameters:
+*      -  name: x-access-token
+*         in: header
+*         description: Token do Usuário autenticado
+*         required: true
+*      -  name: id
+*         in: query
+*         required: true
+*         description: Id do usuário
+*     summary: Atualiza as informações de um usuário específico
+*     requestBody:
+*         required: true
+*         content:
+*           application/json:
+*             schema: 
+*               type: object
+*               properties:
+*                 name:      
+*                   type: string
+*                 email:      
+*                   type: string
+*                 password:      
+*                   type: string
 *     responses:
 *       200:
-*         description: Returns a mysterious string.
+*         description: Retorna um objeto com a usuário atualizado.
+*       500: 
+*         description: Retorna um possivel erro ao executar a operação
 */
 router.put('/update',    auth.authorized, controller.update)
+
 
 /** 
 * @swagger
 * /user/delete:
 *   delete:
 *     tags: [User]
-*     summary: Welcome to swagger-jsdoc!
+*     parameters:
+*      -  name: x-access-token
+*         in: header
+*         description: Token do Usuário autenticado
+*         required: true
+*      -  name: id
+*         in: query
+*         required: true
+*         description: Id do usuário
+*     summary: Remove uma usuário do Banco de Dados
 *     responses:
 *       200:
-*         description: Returns a mysterious string.
+*         description: Retorna o status da transação.
+*       500: 
+*         description: Retorna um possivel erro ao executar a operação
 */
 router.delete('/delete', auth.authorized, controller.delete)
 

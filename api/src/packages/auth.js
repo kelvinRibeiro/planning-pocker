@@ -3,16 +3,6 @@
 const jwt = require('jsonwebtoken')
 const salt = 'a@#1$A'
 
-exports.generateToken = (data) => {
-  let token = jwt.sign(data, salt, { expiresIn: '90d' })
-  return token
-}
-
-exports.decodedToken = async (token) => {
-  let data = jwt.verify(token, salt)
-  return data
-}
-
 exports.authorized = (req, res, next) => {
 
   let token = req.headers['x-access-token']
