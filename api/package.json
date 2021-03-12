@@ -1,0 +1,30 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "challenge backend proposed to concert tech",
+  "main": "app.js",
+  "scripts": {
+    "start": "NODE_ENV=production nodemon bin/server.js",
+    "dev": "NODE_ENV=development DEBUG=express:* nodemon bin/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kelvin Ribeiro",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "ddos": "^0.2.1",
+    "debug": "^4.1.1",
+    "express": "^4.17.1",
+    "helmet": "^3.20.1",
+    "http": "0.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "normalize-port": "^1.0.0",
+    "pg": "^7.14.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.18.0",
+    "socket.io": "^2.3.0",
+    "swagger-jsdoc": "^6.0.0-rc.5",
+    "swagger-ui-express": "^4.1.6"
+  }
+}
